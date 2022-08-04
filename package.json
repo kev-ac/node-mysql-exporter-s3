@@ -1,0 +1,16 @@
+{
+  "name": "node-mysql-backup-s3",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "kev-ac",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.142.0",
+    "dotenv": "^16.0.1",
+    "mysqldump": "^3.2.0"
+  }
+}

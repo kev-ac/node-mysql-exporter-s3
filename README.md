@@ -27,6 +27,23 @@ You can find a list of all required environment variables in the [.env file](.en
   docker pull kevac/node-mysql-exporter-s3
   ```
 
+## Usage
+There are several environment variables to set up all necessary connection points:
+
+- `MYSQL_USERNAME` MySQL username
+- `MYSQL_PASSWORD` MySQL password
+- `MYSQL_DATABASE` MySQL database
+- `MYSQL_HOST` MySQL hostname
+- `MYSQL_PORT` MySQL port
+- `S3_BUCKET` S3 bucket name
+- `S3_ENDPOINT` S3 endpoint url
+- `S3_REGION`, S3 region key
+- `S3_ACCESS_KEY_ID` S3 access key id
+- `S3_SECRET_ACCESS_KEY` S3 secret access key
+- `FILE_PREFIX` File name without extension to be used. {DATETIME} will automatically be replaced with the current datetime
+- `DELETE_AFTER_DAYS` Delete files in the S3 bucket older than x days in the past (end of day)
+
+
 ## Roadmap
 
 See the [open issues](https://github.com/kev-ac/node-mysql-exporter-s3/issues) for a list of proposed features (and known issues).

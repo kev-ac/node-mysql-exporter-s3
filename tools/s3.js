@@ -1,4 +1,4 @@
-import {S3Client, PutObjectCommand} from "@aws-sdk/client-s3";
+import {S3Client, PutObjectCommand, paginateListObjectsV2, DeleteObjectCommand} from "@aws-sdk/client-s3";
 import {createHash} from "crypto";
 import {get} from "../helpers/env-vars.js";
 import {getCurrentTimestamp} from "../helpers/DateTime.js";
@@ -23,6 +23,7 @@ export const putFile = async (fileContent) => new Promise((res, rej) => {
     Key: fileKey,
     Body: fileContent,
     ContentMD5: contentMd5,
+    ContentType: "application/sql"
   });
 
   s3Client.send(command)
@@ -33,4 +34,28 @@ export const putFile = async (fileContent) => new Promise((res, rej) => {
       rej(err);
     })
   ;
-})
+});
+
+export const listFiles = async () => {
+  const totalFiles = [];
+  for await (const data of paginateListObjectsV2({ client: s3Client }, {Bucket: get('S3_BUCKET')})) {
+    totalFiles.push(...(data.Contents ?? []));
+  }
+  return totalFiles;
+}
+
+export const deleteFile = (key) => new Promise((res, rej) => {
+  const command = new DeleteObjectCommand({
+    Bucket: get('S3_BUCKET'),
+    Key: key,
+  });
+
+  s3Client.send(command)
+    .then((r) => {
+      res();
+    })
+    .catch((err) => {
+      rej(err);
+    })
+  ;
+});

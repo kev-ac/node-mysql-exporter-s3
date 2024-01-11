@@ -13,11 +13,7 @@ else {
 }
 
 const ENV_VARS = [
-  "MYSQL_USERNAME",
-  "MYSQL_PASSWORD",
-  "MYSQL_DATABASE",
-  "MYSQL_HOST",
-  "MYSQL_PORT",
+  "DATABASE_DSN",
   "S3_BUCKET",
   "S3_ENDPOINT",
   "S3_REGION",
